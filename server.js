@@ -7,15 +7,18 @@ const bodyParser = require("body-parser");
 const Logger = require("./services/logger");
 const authRoutes = require("./routes/authRoutes");
 const apiRoutes = require("./routes/apiRoutes");
+const adminRoutes = require("./routes/adminRoutes");
 const app = express();
 app.use(
     cors({
         origin: ["http://localhost:3000", "http://localhost:3001"],
     })
 );
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: "10mb" }));
+app.use(bodyParser.urlencoded({ extended: true, limit: "10mb" }));
 app.use("/api", apiRoutes);
 app.use("/auth", authRoutes);
+app.use("/admin", adminRoutes);
 
 // Connect to MongoDB using Mongoose
 mongoose

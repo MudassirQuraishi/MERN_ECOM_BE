@@ -25,8 +25,19 @@ const resetPasswordValidation = Joi.object({
     oldPassword: Joi.string().min(8).required(),
     newPassword: Joi.string().min(8).required(),
 });
+
+const addProductValidation = Joi.object({
+    name: Joi.string().required(),
+    category: Joi.string().required(),
+    originalPrice: Joi.number().required(),
+    discountedPrice: Joi.number().required(),
+    mainImage: Joi.string().required(),
+    sideImages: Joi.array().required(),
+    tags: Joi.array().required(),
+});
 module.exports = {
     signupValidation,
     loginValidation,
     resetPasswordValidation,
+    addProductValidation,
 };

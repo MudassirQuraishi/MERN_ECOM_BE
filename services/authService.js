@@ -32,9 +32,10 @@ exports.authenticateUser = async (req, res, next) => {
         message: "Entered Function",
     });
     try {
+        console.log(req.headers);
         const token = req.headers.authorization || req.params.token;
+        console.log(token);
         const decodedToken = jwt.verify(token, secretKey);
-        console.log(decodedToken);
         const user = await User.findOne({ email: decodedToken.id });
         if (!user) {
             Logger.log("error", {
